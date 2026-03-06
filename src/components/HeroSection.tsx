@@ -29,11 +29,20 @@ const HeroSection = () => {
   const terraceImageScale = useTransform(scrollYProgress, [0, 1], reduceMotion ? [1.02, 1.02] : [1.08, 1.17]);
   const terraceGlowY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [-10, 22]);
   const terraceCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -18]);
-  const experienceCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [12, -4]);
-  const dishCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [18, -14]);
+  const experienceCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : isMobile ? [10, 0] : [12, -4]);
+  const dishCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : isMobile ? [26, -4] : [18, -14]);
   const contentY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -20]);
   const dishIntroX = isMobile ? 92 : 176;
   const dishIntroY = isMobile ? -124 : -148;
+  const experienceCardClassName = isMobile
+    ? 'absolute bottom-7 left-[49%] right-3 z-20 rounded-[20px] border border-white/10 bg-black/24 p-3 backdrop-blur-md'
+    : 'absolute bottom-1 right-4 z-20 max-w-[190px] rounded-[22px] border border-white/10 bg-black/22 p-3.5 backdrop-blur-md sm:bottom-2 sm:right-6 sm:max-w-[280px] sm:rounded-[24px] sm:p-5';
+  const experienceValueClassName = isMobile
+    ? 'mt-2 max-w-[11ch] font-display text-[1rem] leading-[1.06] tracking-[-0.03em] text-foreground'
+    : 'mt-2 font-display text-[1.15rem] leading-tight text-foreground sm:text-[2rem]';
+  const dishCardClassName = isMobile
+    ? 'absolute -bottom-10 left-0 w-[44%]'
+    : 'absolute -bottom-5 left-0 w-[48%] sm:-bottom-6 sm:w-[40%] lg:w-[42%]';
 
   useEffect(() => {
     const onResize = () => setIsCompactHero(window.innerWidth < 1280);
@@ -185,7 +194,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: reduceMotion ? 0 : 26 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto w-full max-w-[620px] pb-14 sm:pb-20 lg:pb-16"
+            className="relative mx-auto w-full max-w-[620px] pb-24 sm:pb-20 lg:pb-16"
           >
             <motion.div
               style={{ y: terraceGlowY }}
@@ -237,10 +246,10 @@ const HeroSection = () => {
 
               <motion.div
                 style={{ y: experienceCardY }}
-                className="absolute bottom-1 right-4 z-20 max-w-[190px] rounded-[22px] border border-white/10 bg-black/22 p-3.5 backdrop-blur-md sm:bottom-2 sm:right-6 sm:max-w-[280px] sm:rounded-[24px] sm:p-5"
+                className={experienceCardClassName}
               >
-                <p className="text-[10px] uppercase tracking-[0.28em] text-gold">{t('hero.experienceLabel')}</p>
-                <p className="mt-2 font-display text-[1.15rem] leading-tight text-foreground sm:text-[2rem]">
+                <p className="text-[9px] uppercase tracking-[0.24em] text-gold sm:text-[10px] sm:tracking-[0.28em]">{t('hero.experienceLabel')}</p>
+                <p className={experienceValueClassName}>
                   {t('hero.experienceValue')}
                 </p>
               </motion.div>
@@ -248,7 +257,7 @@ const HeroSection = () => {
 
             <motion.div
               style={{ y: dishCardY }}
-              className="absolute -bottom-5 left-0 w-[48%] sm:-bottom-6 sm:w-[40%] lg:w-[42%]"
+              className={dishCardClassName}
             >
               <motion.div
                 initial={{
@@ -275,9 +284,9 @@ const HeroSection = () => {
                   transition={reduceMotion ? undefined : { duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
                   className="relative overflow-hidden rounded-[20px]"
                 >
-                  <img src={heroDish} alt="Detail aus der Küche im Restaurant Neue Liebe" className="h-[190px] w-full object-cover object-top sm:h-[230px]" />
+                  <img src={heroDish} alt="Detail aus der Küche im Restaurant Neue Liebe" className="h-[170px] w-full object-cover object-top sm:h-[230px]" />
                   <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-black/72 via-black/16 to-transparent" />
-                  <div className="absolute bottom-2.5 left-2.5 max-w-[72%] rounded-[16px] border border-white/10 bg-black/22 px-2.5 py-2 backdrop-blur-md sm:bottom-3 sm:left-3 sm:max-w-[74%] sm:rounded-[18px] sm:px-3 sm:py-2.5">
+                  <div className="absolute bottom-2 left-2 max-w-[76%] rounded-[15px] border border-white/10 bg-black/22 px-2 py-1.5 backdrop-blur-md sm:bottom-3 sm:left-3 sm:max-w-[74%] sm:rounded-[18px] sm:px-3 sm:py-2.5">
                     <p className="text-[8px] uppercase tracking-[0.22em] text-gold sm:text-[9px]">{t('hero.dishLabel')}</p>
                     <p className="mt-1 max-w-[16ch] text-[0.8rem] leading-[1.12] text-foreground sm:text-[0.9rem]">{t('hero.dishValue')}</p>
                   </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useLang } from '@/contexts/LangContext';
 import appetizer from '@/assets/appetizer.jpg';
 import mainCourse from '@/assets/main-course.jpg';
@@ -60,67 +60,166 @@ const categoryTranslationKeys: Record<string, string> = {
 
 const MenuSection = () => {
   const { lang, t } = useLang();
+  const reduceMotion = useReducedMotion();
   const [active, setActive] = useState<string>('starters');
   const data = menuData[active];
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: reduceMotion ? 0 : 0.08,
+        delayChildren: reduceMotion ? 0 : 0.08,
+      },
+    },
+  };
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: reduceMotion ? 0 : 24,
+      filter: reduceMotion ? 'blur(0px)' : 'blur(10px)',
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: reduceMotion ? 0.2 : 0.72,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
 
   return (
     <section id="menu" className="py-24 lg:py-36 bg-dark-deep relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-gold text-xs tracking-[0.3em] uppercase font-body">{t('menu.subtitle')}</span>
+        <div className="mb-16 text-center">
+          <motion.span
+            initial={{ opacity: 0, x: reduceMotion ? 0 : -54 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.65 }}
+            transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-block text-gold text-xs tracking-[0.3em] uppercase font-body"
+          >
+            {t('menu.subtitle')}
+          </motion.span>
           <div className="section-divider mx-auto mt-4 mb-6" />
-          <h2 className="font-display text-4xl lg:text-6xl text-foreground">{t('menu.title')}</h2>
-        </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, x: reduceMotion ? 0 : 58 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.82, delay: reduceMotion ? 0 : 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-4xl lg:text-6xl text-foreground tracking-[-0.04em]"
+          >
+            {t('menu.title')}
+          </motion.h2>
+        </div>
 
         {/* Category tabs */}
-        <div className="flex justify-center gap-2 md:gap-8 mb-16 flex-wrap">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.35 }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.08,
+                delayChildren: 0.14,
+              },
+            },
+          }}
+          className="mb-16 flex flex-wrap justify-center gap-3 md:gap-4"
+        >
           {categoryKeys.map((key) => (
-            <button
+            <motion.button
               key={key}
+              variants={{
+                hidden: {
+                  opacity: 0,
+                  y: reduceMotion ? 0 : 28,
+                },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                },
+              }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               onClick={() => setActive(key)}
-              className={`text-xs md:text-sm tracking-[0.2em] uppercase font-body px-4 py-2 border transition-all duration-300 ${
+              whileHover={reduceMotion ? undefined : { y: -2 }}
+              whileTap={reduceMotion ? undefined : { scale: 0.985 }}
+              className={`rounded-full border px-5 py-3 text-[11px] md:px-6 md:text-sm tracking-[0.2em] uppercase font-body transition-all duration-300 backdrop-blur-md ${
                 active === key
-                  ? 'border-gold text-gold'
-                  : 'border-transparent text-muted-foreground hover:text-foreground'
+                  ? 'border-gold/65 bg-gold/12 text-gold shadow-[0_10px_28px_rgba(201,146,46,0.16)]'
+                  : 'border-white/10 bg-white/[0.03] text-muted-foreground hover:border-white/18 hover:text-foreground'
               }`}
             >
               {t(categoryTranslationKeys[key])}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Menu content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-14">
           <motion.div
             key={active}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{
+              opacity: 0,
+              x: reduceMotion ? 0 : -26,
+              scale: reduceMotion ? 1 : 0.985,
+            }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
           >
-            <img src={data.image} alt={t(categoryTranslationKeys[active])} className="w-full h-[400px] object-cover" />
+            <div className="absolute -inset-4 rounded-[34px] bg-[radial-gradient(circle,rgba(201,146,46,0.15),transparent_72%)] blur-3xl" />
+            <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-2 shadow-[0_28px_80px_rgba(0,0,0,0.28)]">
+              <div className="overflow-hidden rounded-[22px]">
+                <img
+                  src={data.image}
+                  alt={t(categoryTranslationKeys[active])}
+                  className="h-[400px] w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+                />
+              </div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent" />
+            </div>
           </motion.div>
 
           <motion.div
             key={active + '-items'}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-8"
+            initial="hidden"
+            animate="visible"
+            variants={listVariants}
+            className="grid gap-4 sm:gap-5"
           >
             {data.items.map((item, i) => (
-              <div key={i} className="border-b border-border pb-6">
-                <div className="flex justify-between items-baseline mb-2">
-                  <h4 className="font-display text-xl text-foreground">{item.name[lang]}</h4>
-                  <span className="text-gold font-body text-sm ml-4 shrink-0">{item.price}</span>
+              <motion.article
+                key={`${active}-${i}`}
+                variants={itemVariants}
+                whileHover={reduceMotion ? undefined : { y: -4 }}
+                className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-colors duration-300 sm:p-6"
+              >
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent_38%,transparent)] opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-gold/20 bg-white/[0.04] px-2 text-[10px] tracking-[0.22em] text-gold">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <div className="h-px w-10 bg-gold/35" />
+                    </div>
+                    <h4 className="mt-4 font-display text-[1.45rem] leading-tight tracking-[-0.03em] text-foreground sm:text-[1.65rem]">
+                      {item.name[lang]}
+                    </h4>
+                  </div>
+                  <span className="shrink-0 rounded-full border border-gold/30 bg-gold/10 px-3 py-2 text-sm text-gold shadow-[0_8px_20px_rgba(201,146,46,0.14)]">
+                    {item.price}
+                  </span>
                 </div>
-                <p className="text-muted-foreground text-sm font-body">{item.desc[lang]}</p>
-              </div>
+                <p className="relative mt-4 max-w-[44ch] font-body text-sm leading-relaxed text-foreground/66 sm:text-[0.96rem]">
+                  {item.desc[lang]}
+                </p>
+              </motion.article>
             ))}
           </motion.div>
         </div>
