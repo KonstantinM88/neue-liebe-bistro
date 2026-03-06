@@ -6,23 +6,23 @@
 
 @layer base {
   :root {
-    --background: 220 20% 8%;
-    --foreground: 40 20% 90%;
+    --background: 195 52% 6%;
+    --foreground: 38 24% 91%;
 
-    --card: 220 18% 12%;
-    --card-foreground: 40 20% 90%;
+    --card: 194 34% 9%;
+    --card-foreground: 38 24% 91%;
 
-    --popover: 220 18% 12%;
-    --popover-foreground: 40 20% 90%;
+    --popover: 194 34% 9%;
+    --popover-foreground: 38 24% 91%;
 
     --primary: 36 80% 50%;
-    --primary-foreground: 220 20% 8%;
+    --primary-foreground: 195 52% 6%;
 
-    --secondary: 220 15% 18%;
-    --secondary-foreground: 40 20% 85%;
+    --secondary: 194 26% 15%;
+    --secondary-foreground: 38 22% 87%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 55%;
+    --muted: 194 24% 12%;
+    --muted-foreground: 194 10% 58%;
 
     --accent: 36 60% 40%;
     --accent-foreground: 40 20% 95%;
@@ -30,27 +30,27 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 20%;
-    --input: 220 15% 20%;
+    --border: 194 18% 18%;
+    --input: 194 18% 18%;
     --ring: 36 80% 50%;
 
     --radius: 0.25rem;
 
-    --sidebar-background: 220 20% 8%;
-    --sidebar-foreground: 40 20% 90%;
+    --sidebar-background: 195 52% 6%;
+    --sidebar-foreground: 38 24% 91%;
     --sidebar-primary: 36 80% 50%;
-    --sidebar-primary-foreground: 220 20% 8%;
-    --sidebar-accent: 220 15% 15%;
-    --sidebar-accent-foreground: 40 20% 90%;
-    --sidebar-border: 220 15% 20%;
+    --sidebar-primary-foreground: 195 52% 6%;
+    --sidebar-accent: 194 24% 12%;
+    --sidebar-accent-foreground: 38 24% 91%;
+    --sidebar-border: 194 18% 18%;
     --sidebar-ring: 36 80% 50%;
 
     /* Custom tokens */
     --gold: 36 80% 50%;
     --gold-light: 36 70% 65%;
     --gold-muted: 36 30% 35%;
-    --dark-deep: 220 25% 5%;
-    --dark-surface: 220 18% 12%;
+    --dark-deep: 196 56% 4%;
+    --dark-surface: 194 36% 8%;
     --cream: 40 30% 88%;
 
     --font-display: 'Playfair Display', serif;
@@ -67,6 +67,44 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    overflow-x: hidden;
+    position: relative;
+    isolation: isolate;
+    background-color: hsl(var(--background));
+    background-image:
+      radial-gradient(circle at 16% 10%, rgba(23, 78, 74, 0.24), transparent 24%),
+      radial-gradient(circle at 82% 18%, rgba(9, 41, 43, 0.26), transparent 30%),
+      radial-gradient(circle at 50% 120%, rgba(8, 34, 37, 0.32), transparent 42%),
+      linear-gradient(180deg, rgba(5, 21, 24, 0.98) 0%, rgba(3, 14, 16, 0.985) 52%, rgba(2, 10, 12, 0.99) 100%);
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%2395b8b2' stroke-opacity='.085' stroke-width='1.15'%3E%3Cpath d='M80 8c11 24 31 31 55 33-24 2-44 9-55 33-11-24-31-31-55-33 24-2 44-9 55-33Z'/%3E%3Cpath d='M8 80c24-11 31-31 33-55 2 24 9 44 33 55-24 11-31 31-33 55-2-24-9-44-33-55Z'/%3E%3Cpath d='M80 56c5 11 14 14 25 16-11 2-20 5-25 16-5-11-14-14-25-16 11-2 20-5 25-16Z'/%3E%3C/g%3E%3Ccircle cx='80' cy='80' r='18' fill='%23ffffff' fill-opacity='.022'/%3E%3Ccircle cx='80' cy='80' r='6' fill='%23d7a24b' fill-opacity='.08'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%236b8f8b' stroke-opacity='.06' stroke-width='1'%3E%3Cpath d='M80 20c8 18 22 23 40 25-18 2-32 7-40 25-8-18-22-23-40-25 18-2 32-7 40-25Z'/%3E%3Cpath d='M20 80c18-8 23-22 25-40 2 18 7 32 25 40-18 8-23 22-25 40-2-18-7-32-25-40Z'/%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(125deg, rgba(255, 255, 255, 0.018), transparent 36%, rgba(255, 255, 255, 0.01) 52%, transparent 74%);
+    background-size: 220px 220px, 220px 220px, 100% 100%;
+    background-position: 0 0, 110px 110px, 0 0;
+    mix-blend-mode: soft-light;
+    opacity: 0.11;
+    z-index: 1;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.05), transparent 28%),
+      linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.02) 32%, transparent 58%),
+      radial-gradient(circle at center, transparent 48%, rgba(1, 8, 10, 0.56) 100%);
+    opacity: 0.38;
+    z-index: 0;
   }
 
   h1, h2, h3, h4, h5, h6 {

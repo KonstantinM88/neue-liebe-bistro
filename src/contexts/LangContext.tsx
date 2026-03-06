@@ -18,9 +18,39 @@ const translations: Translations = {
   // Hero
   'hero.title': { de: 'Gemütliches Dining-Erlebnis mit authentischen Aromen', en: 'Cozy Dining Experience with Authentic Flavor Delights' },
   'hero.subtitle': { de: 'Willkommen bei Neue Liebe', en: 'Welcome to Neue Liebe' },
+  'hero.badge': { de: 'Restaurant · Gastraum · Nebra (Unstrut)', en: 'Restaurant · Dining Room · Nebra (Unstrut)' },
+  'hero.description': {
+    de: 'Ein heller Gastraum mit warmem Tageslicht, gemütlichen Sitznischen und entspannter Atmosphäre für ruhige Genussmomente in Nebra an der Unstrut.',
+    en: 'A bright dining room with warm daylight, cozy seating corners, and a calm atmosphere for unhurried moments in Nebra on the Unstrut.',
+  },
   'hero.explore': { de: 'Entdecken', en: 'Explore More' },
   'hero.visit': { de: 'Besuchen Sie uns', en: 'Visit Us' },
   'hero.contactUs': { de: 'Kontaktieren Sie uns', en: 'Contact Us' },
+  'hero.callNow': { de: 'Jetzt anrufen', en: 'Call now' },
+  'hero.openLabel': { de: 'Jeden Tag für Sie', en: 'Here for you daily' },
+  'hero.openValue': { de: 'Geöffnet bis 23:00 Uhr', en: 'Open until 23:00' },
+  'hero.experienceLabel': { de: 'Atmosphäre', en: 'Atmosphere' },
+  'hero.experienceValue': {
+    de: 'Licht, Ruhe, feine Gemütlichkeit',
+    en: 'Light, calm, refined comfort',
+  },
+  'hero.addressHeadline': { de: 'Wetzendorfer Str. 10', en: 'Wetzendorfer Str. 10' },
+  'hero.addressDetail': { de: '06642 Nebra (Unstrut)', en: '06642 Nebra (Unstrut)' },
+  'hero.hoursHeadline': { de: 'Täglich geöffnet', en: 'Open every day' },
+  'hero.hoursDetail': {
+    de: 'Für entspannte Genussmomente bis 23:00 Uhr.',
+    en: 'For relaxed dining moments until 23:00.',
+  },
+  'hero.phoneHeadline': { de: '034461 599804', en: '034461 599804' },
+  'hero.phoneDetail': {
+    de: 'Reservierungen und persönliche Anfragen gern telefonisch.',
+    en: 'Reservations and personal inquiries welcome by phone.',
+  },
+  'hero.dishLabel': { de: 'Detail aus der Küche', en: 'Kitchen detail' },
+  'hero.dishValue': {
+    de: 'Fein angerichtet, elegant serviert',
+    en: 'Carefully plated, elegantly served',
+  },
 
   // About
   'about.welcome': { de: 'Willkommen', en: 'Welcome' },
@@ -55,7 +85,10 @@ const translations: Translations = {
   'footer.rights': { de: 'Alle Rechte vorbehalten.', en: 'All rights reserved.' },
 
   // Marquee
-  'marquee.text': { de: 'Köstliche Aromen · Gemütliche Atmosphäre · Perfekte Terrasse', en: 'Delicious Flavors · Cozy Atmosphere · Perfect Terrace' },
+  'marquee.text': {
+    de: 'Feine Aromen · Lichtdurchfluteter Gastraum · Ruhige Genussmomente · Täglich bis 23:00',
+    en: 'Refined flavors · Light-filled dining room · Calm dining moments · Open daily until 23:00',
+  },
 };
 
 interface LangContextType {
