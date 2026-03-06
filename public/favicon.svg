@@ -1,0 +1,41 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Neue Liebe favicon">
+  <defs>
+    <linearGradient id="bg" x1="28" y1="22" x2="228" y2="234" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#100b09" />
+      <stop offset="1" stop-color="#251a15" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(175 62) rotate(145) scale(84 60)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e0bc6d" stop-opacity=".42" />
+      <stop offset="1" stop-color="#e0bc6d" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="gold" x1="82" y1="56" x2="176" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f1ddb2" />
+      <stop offset=".52" stop-color="#d1aa67" />
+      <stop offset="1" stop-color="#b8833e" />
+    </linearGradient>
+  </defs>
+
+  <rect x="18" y="18" width="220" height="220" rx="54" fill="url(#bg)" />
+  <ellipse cx="168" cy="64" rx="72" ry="54" fill="url(#glow)" />
+  <rect x="18" y="18" width="220" height="220" rx="54" fill="none" stroke="#c69655" stroke-opacity=".62" stroke-width="3" />
+
+  <g fill="#0a0705" opacity=".28" transform="translate(6 6)">
+    <rect x="72" y="56" width="24" height="144" rx="7" />
+    <polygon points="96 56 126 56 176 200 146 200" />
+    <rect x="160" y="56" width="24" height="108" rx="7" />
+    <rect x="160" y="176" width="42" height="24" rx="7" />
+  </g>
+
+  <g fill="url(#gold)">
+    <rect x="72" y="56" width="24" height="144" rx="7" />
+    <polygon points="96 56 126 56 176 200 146 200" />
+    <rect x="160" y="56" width="24" height="108" rx="7" />
+    <rect x="160" y="176" width="42" height="24" rx="7" />
+  </g>
+
+  <g stroke="#fff5de" stroke-opacity=".26" stroke-width="2.2" stroke-linecap="round">
+    <path d="M78 62v132" />
+    <path d="M103 62l48 132" />
+    <path d="M166 62v96" />
+  </g>
+</svg>
