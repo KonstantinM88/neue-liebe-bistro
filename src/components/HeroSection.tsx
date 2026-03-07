@@ -101,9 +101,9 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="home" ref={heroRef} className="theme-noir section-aura section-aura--hero relative overflow-hidden bg-background pt-28 sm:pt-32 lg:pt-40">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(201,146,46,0.18),transparent_36%),radial-gradient(circle_at_85%_20%,rgba(255,255,255,0.08),transparent_28%)]" />
-      <div className="absolute inset-y-0 right-0 w-full bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.03)_45%,transparent_100%)] opacity-40" />
+    <section id="home" ref={heroRef} className="theme-merlot-noir section-aura section-aura--merlot relative overflow-hidden bg-dark-deep pt-28 sm:pt-32 lg:pt-40">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(201,146,46,0.16),transparent_34%),radial-gradient(circle_at_85%_20%,rgba(125,65,57,0.18),transparent_28%)]" />
+      <div className="absolute inset-y-0 right-0 w-full bg-[linear-gradient(110deg,transparent_0%,rgba(175,124,103,0.06)_45%,transparent_100%)] opacity-50" />
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 pb-16 lg:px-12 lg:pb-20">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:gap-10 xl:gap-16">
