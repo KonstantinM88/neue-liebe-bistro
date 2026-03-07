@@ -194,7 +194,7 @@ const GallerySection = () => {
   const isMobile = useIsMobile();
 
   return (
-    <section id="gallery" className="relative overflow-hidden py-24 lg:py-36 bg-background">
+    <section id="gallery" className="theme-ivory section-aura section-aura--sapphire section-panel relative overflow-hidden py-24 lg:py-36 bg-background">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-white/5 to-transparent" />
       <div
         className="pointer-events-none absolute -right-20 top-20 h-72 w-72 rounded-full blur-3xl"

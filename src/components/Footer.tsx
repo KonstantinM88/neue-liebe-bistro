@@ -5,7 +5,7 @@ const Footer = () => {
   const { t } = useLang();
 
   return (
-    <footer className="bg-background border-t border-border py-12">
+    <footer className="theme-merlot-noir section-aura section-aura--footer relative bg-background border-t border-border py-12">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <ScrollReveal delay={0.04}>

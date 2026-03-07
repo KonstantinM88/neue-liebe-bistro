@@ -101,7 +101,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section id="home" ref={heroRef} className="relative overflow-hidden bg-background pt-28 sm:pt-32 lg:pt-40">
+    <section id="home" ref={heroRef} className="theme-noir section-aura section-aura--hero relative overflow-hidden bg-background pt-28 sm:pt-32 lg:pt-40">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(201,146,46,0.18),transparent_36%),radial-gradient(circle_at_85%_20%,rgba(255,255,255,0.08),transparent_28%)]" />
       <div className="absolute inset-y-0 right-0 w-full bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.03)_45%,transparent_100%)] opacity-40" />
 

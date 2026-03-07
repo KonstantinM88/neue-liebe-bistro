@@ -5,15 +5,7 @@ import { useLang } from '@/contexts/LangContext';
 
 const Navbar = () => {
   const { lang, setLang, t } = useLang();
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
@@ -47,13 +39,13 @@ const Navbar = () => {
       initial={{ y: -36, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8"
+      className="absolute inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8"
     >
       <div
-        className={`mx-auto max-w-7xl rounded-full border transition-all duration-500 ${
-          scrolled || mobileOpen
-            ? 'border-white/10 bg-background/80 shadow-[0_18px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl'
-            : 'border-white/8 bg-background/30 shadow-[0_12px_36px_rgba(0,0,0,0.18)] backdrop-blur-md'
+        className={`mx-auto max-w-7xl rounded-full border ring-1 ring-white/5 transition-all duration-500 ${
+          mobileOpen
+            ? 'border-white/12 bg-background/56 shadow-[0_18px_60px_rgba(0,0,0,0.24)] backdrop-blur-2xl'
+            : 'border-white/10 bg-background/22 shadow-[0_12px_36px_rgba(0,0,0,0.14)] backdrop-blur-xl'
         }`}
       >
         <div className="flex h-16 items-center justify-between px-4 sm:h-[74px] sm:px-6 lg:px-8">
@@ -77,11 +69,11 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-3 xl:gap-4">
-            <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1 text-sm tracking-wider">
+            <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.035] px-2 py-1 text-sm tracking-wider backdrop-blur-md">
               <button
                 onClick={() => setLang('de')}
                 className={`rounded-full px-2.5 py-1 transition-colors ${
-                  lang === 'de' ? 'bg-white/8 text-gold' : 'text-muted-foreground hover:text-foreground'
+                  lang === 'de' ? 'bg-white/[0.1] text-gold' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 DE
@@ -89,7 +81,7 @@ const Navbar = () => {
               <button
                 onClick={() => setLang('en')}
                 className={`rounded-full px-2.5 py-1 transition-colors ${
-                  lang === 'en' ? 'bg-white/8 text-gold' : 'text-muted-foreground hover:text-foreground'
+                  lang === 'en' ? 'bg-white/[0.1] text-gold' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 EN
@@ -98,7 +90,7 @@ const Navbar = () => {
 
             <a
               href="#contact"
-              className="rounded-full border border-gold/60 bg-gold/10 px-5 py-2.5 text-[11px] tracking-[0.24em] uppercase text-gold hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              className="rounded-full border border-gold/60 bg-gold/8 px-5 py-2.5 text-[11px] tracking-[0.24em] uppercase text-gold hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
               {t('nav.reserve')}
             </a>
@@ -106,7 +98,7 @@ const Navbar = () => {
 
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-foreground transition-colors hover:border-gold/40 hover:text-gold"
+            className="lg:hidden flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.035] text-foreground backdrop-blur-md transition-colors hover:border-gold/40 hover:text-gold"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}

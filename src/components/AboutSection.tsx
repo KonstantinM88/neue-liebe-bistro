@@ -45,8 +45,8 @@ const AboutSection = () => {
           : ['Delicious', 'dishes:', 'fresh flavors', 'for every', 'taste'];
 
   return (
-    <section id="about" className="relative overflow-hidden bg-background py-24 lg:py-36">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_28%,rgba(201,146,46,0.08),transparent_24%),radial-gradient(circle_at_80%_22%,rgba(255,255,255,0.04),transparent_20%)]" />
+    <section id="about" className="theme-cappuccino section-aura section-aura--emerald section-panel relative overflow-hidden bg-background py-24 lg:py-36">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_28%,rgba(201,146,46,0.1),transparent_24%),radial-gradient(circle_at_80%_22%,rgba(255,255,255,0.06),transparent_20%),linear-gradient(180deg,rgba(255,255,255,0.12),transparent_38%,rgba(117,88,58,0.03)_100%)]" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,0.94fr)_minmax(0,1.06fr)] lg:gap-16 xl:gap-20">
@@ -68,7 +68,7 @@ const AboutSection = () => {
             className="relative"
           >
             <div className="absolute -inset-4 rounded-[42px] bg-[radial-gradient(circle,rgba(201,146,46,0.18),transparent_68%)] blur-3xl" />
-            <div className="relative overflow-hidden rounded-[34px] border border-white/10 bg-dark-surface p-2 shadow-[0_30px_90px_rgba(0,0,0,0.34)] sm:rounded-[42px] lg:rounded-[52px]">
+            <div className="relative overflow-hidden rounded-[34px] border border-[rgba(132,101,71,0.14)] bg-[linear-gradient(135deg,rgba(255,249,241,0.5),rgba(241,232,219,0.36))] p-2 shadow-[0_28px_80px_rgba(77,54,29,0.18)] sm:rounded-[42px] lg:rounded-[52px]">
               <div className="overflow-hidden rounded-[28px] sm:rounded-[34px] lg:rounded-[44px]">
                 <motion.img
                   src={interior}
@@ -101,16 +101,16 @@ const AboutSection = () => {
               initial={{ opacity: 0, y: reduceMotion ? 0 : 16 }}
               animate={{ opacity: isTextInView || reduceMotion ? 1 : 0, y: isTextInView || reduceMotion ? 0 : 16 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              className="font-body text-[11px] uppercase tracking-[0.42em] text-gold"
+              className="font-body text-[11px] uppercase tracking-[0.42em] text-[rgba(181,142,84,0.96)]"
             >
               {t('about.welcome')}
             </motion.span>
-            <div className="mt-4 h-px w-16 bg-gradient-to-r from-gold to-transparent" />
+            <div className="mt-4 h-px w-16 bg-gradient-to-r from-[rgba(181,142,84,0.92)] to-transparent" />
 
             <h2
               ref={titleRef}
               aria-label={t('about.title')}
-              className="mt-8 max-w-[11ch] font-display text-[clamp(2.55rem,5vw,5rem)] leading-[0.92] tracking-[-0.05em] text-foreground"
+              className="mt-8 max-w-[11ch] font-display text-[clamp(2.55rem,5vw,5rem)] leading-[0.92] tracking-[-0.05em] text-[rgba(27,21,17,0.96)]"
             >
               {titleLines.map((line, index) => (
                 <span key={`${line}-${index}`} className="block overflow-hidden">
@@ -143,7 +143,7 @@ const AboutSection = () => {
                 initial={{ opacity: 0, y: reduceMotion ? 0 : isMobile ? 30 : 22 }}
                 animate={{ opacity: isTextInView || reduceMotion ? 1 : 0, y: isTextInView || reduceMotion ? 0 : isMobile ? 30 : 22 }}
                 transition={{ duration: 0.72, delay: reduceMotion ? 0 : isMobile ? 0.12 : 0.26, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-7 max-w-[35rem] font-body text-[1.02rem] leading-[1.9] text-foreground/68 sm:text-[1.08rem]"
+              className="mt-7 max-w-[35rem] font-body text-[1.02rem] leading-[1.9] text-[rgba(64,48,35,0.9)] sm:text-[1.08rem]"
               >
                 {t('about.desc')}
               </motion.p>
@@ -156,7 +156,7 @@ const AboutSection = () => {
               >
                 <a
                   href="#menu"
-                  className="inline-flex items-center gap-2 rounded-full border border-gold/55 bg-gold/10 px-6 py-3 font-body text-[11px] uppercase tracking-[0.28em] text-gold transition-all duration-300 hover:bg-gold hover:text-background"
+                  className="inline-flex items-center gap-2 rounded-full border border-[rgba(181,142,84,0.42)] bg-[rgba(181,142,84,0.1)] px-6 py-3 font-body text-[11px] uppercase tracking-[0.28em] text-[rgba(36,28,22,0.92)] transition-all duration-300 hover:border-[rgba(181,142,84,0.72)] hover:bg-[rgba(181,142,84,0.22)] hover:text-[rgba(24,18,14,0.96)]"
                 >
                   {t('about.cta')}
                   <ArrowRight size={14} />
@@ -167,11 +167,11 @@ const AboutSection = () => {
                 initial={{ opacity: 0, y: reduceMotion ? 0 : isMobile ? 34 : 26 }}
                 animate={{ opacity: isTextInView || reduceMotion ? 1 : 0, y: isTextInView || reduceMotion ? 0 : isMobile ? 34 : 26 }}
                 transition={{ duration: 0.78, delay: reduceMotion ? 0 : isMobile ? 0.32 : 0.46, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-12 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-6 shadow-[0_22px_60px_rgba(0,0,0,0.2)] backdrop-blur-md sm:p-7"
+                className="mt-12 rounded-[28px] border border-[rgba(132,101,71,0.14)] bg-[linear-gradient(135deg,rgba(255,252,248,0.84),rgba(246,236,221,0.7))] p-6 shadow-[0_22px_60px_rgba(90,64,34,0.12)] backdrop-blur-md sm:p-7"
               >
-                <h5 className="font-body text-[10px] uppercase tracking-[0.32em] text-gold">{t('about.hours')}</h5>
-                <p className="mt-4 font-display text-[1.7rem] leading-tight text-foreground sm:text-[2rem]">{t('hero.openValue')}</p>
-                <p className="mt-3 max-w-[30ch] font-body text-sm leading-relaxed text-foreground/64 sm:text-[0.98rem]">{t('about.hoursDetail')}</p>
+                <h5 className="font-body text-[10px] uppercase tracking-[0.32em] text-[rgba(181,142,84,0.94)]">{t('about.hours')}</h5>
+                <p className="mt-4 font-display text-[1.7rem] leading-tight text-[rgba(27,21,17,0.96)] sm:text-[2rem]">{t('hero.openValue')}</p>
+                <p className="mt-3 max-w-[30ch] font-body text-sm leading-relaxed text-[rgba(76,58,42,0.82)] sm:text-[0.98rem]">{t('about.hoursDetail')}</p>
               </motion.div>
             </div>
           </motion.div>

@@ -54,7 +54,7 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
       <Navbar />
-      <main>
+      <main className="page-stage">
         <HeroSection />
         <MarqueeSection />
         <AboutSection />

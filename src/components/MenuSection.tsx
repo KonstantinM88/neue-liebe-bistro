@@ -361,7 +361,7 @@ const MenuSection = () => {
   };
 
   return (
-    <section id="menu" className="py-24 lg:py-36 bg-dark-deep relative">
+    <section id="menu" className="theme-copper-noir section-aura section-aura--copper section-panel py-24 lg:py-36 bg-dark-deep relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="mb-16 text-center">

@@ -6,7 +6,7 @@ const ContactSection = () => {
   const { t } = useLang();
 
   return (
-    <section id="contact" className="py-24 lg:py-36 bg-dark-deep">
+    <section id="contact" className="theme-merlot-noir section-aura section-aura--merlot section-panel py-24 lg:py-36 bg-dark-deep">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <ScrollReveal className="text-center mb-16">
           <span className="text-gold text-xs tracking-[0.3em] uppercase font-body">{t('contact.findUs')}</span>
