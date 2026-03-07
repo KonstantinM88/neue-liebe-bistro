@@ -3,7 +3,7 @@ import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useLang } from '@/contexts/LangContext';
 import { useIsMobile } from '@/hooks/use-mobile';
-import interior from '@/assets/interior.jpg';
+import interior from '@/assets/unnamed (9).webp';
 
 const AboutSection = () => {
   const { lang, t } = useLang();

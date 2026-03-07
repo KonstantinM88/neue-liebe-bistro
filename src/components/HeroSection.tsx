@@ -29,20 +29,21 @@ const HeroSection = () => {
   const terraceImageScale = useTransform(scrollYProgress, [0, 1], reduceMotion ? [1.02, 1.02] : [1.08, 1.17]);
   const terraceGlowY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [-10, 22]);
   const terraceCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -18]);
-  const experienceCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : isMobile ? [10, 0] : [12, -4]);
-  const dishCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : isMobile ? [26, -4] : [18, -14]);
+  const experienceCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : isMobile ? [12, 2] : [12, -4]);
+  const dishCardY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : isMobile ? [14, -8] : [18, -14]);
   const contentY = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -20]);
   const dishIntroX = isMobile ? 92 : 176;
   const dishIntroY = isMobile ? -124 : -148;
   const experienceCardClassName = isMobile
-    ? 'absolute bottom-7 left-[49%] right-3 z-20 rounded-[20px] border border-white/10 bg-black/24 p-3 backdrop-blur-md'
+    ? 'absolute bottom-2 left-[49%] right-3 z-30 rounded-[20px] border border-white/10 bg-black/24 p-3 backdrop-blur-md'
     : 'absolute bottom-1 right-4 z-20 max-w-[190px] rounded-[22px] border border-white/10 bg-black/22 p-3.5 backdrop-blur-md sm:bottom-2 sm:right-6 sm:max-w-[280px] sm:rounded-[24px] sm:p-5';
   const experienceValueClassName = isMobile
     ? 'mt-2 max-w-[11ch] font-display text-[1rem] leading-[1.06] tracking-[-0.03em] text-foreground'
     : 'mt-2 font-display text-[1.15rem] leading-tight text-foreground sm:text-[2rem]';
   const dishCardClassName = isMobile
-    ? 'absolute -bottom-10 left-0 w-[44%]'
+    ? 'absolute -bottom-5 left-0 z-20 w-[44%]'
     : 'absolute -bottom-5 left-0 w-[48%] sm:-bottom-6 sm:w-[40%] lg:w-[42%]';
+  const mapsUrl = 'https://www.google.com/maps/search/?api=1&query=Wetzendorfer%20Str.%2010%2C%2006642%20Nebra%20(Unstrut)%2C%20Germany';
 
   useEffect(() => {
     const onResize = () => setIsCompactHero(window.innerWidth < 1280);
@@ -72,7 +73,12 @@ const HeroSection = () => {
       headline: t('hero.addressHeadline'),
       detail: t('hero.addressDetail'),
       content: (
-        <a href="#contact" className="inline-flex items-center gap-2 text-sm text-foreground/80 transition-colors hover:text-gold">
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-2 text-sm text-foreground/80 transition-colors hover:text-gold"
+        >
           {t('contact.findUs')}
           <ArrowRight size={14} />
         </a>
@@ -106,9 +112,9 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: reduceMotion ? 0 : 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 backdrop-blur-sm"
+              className="mx-auto inline-flex max-w-full items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 backdrop-blur-sm sm:mx-0 sm:justify-start sm:px-4 sm:py-2"
             >
-              <span className="font-body text-[10px] uppercase tracking-[0.32em] text-gold sm:text-[11px]">
+              <span className="max-w-full whitespace-nowrap font-body text-[8px] uppercase tracking-[0.18em] text-gold max-[360px]:text-[7px] max-[360px]:tracking-[0.12em] sm:text-[11px] sm:tracking-[0.32em]">
                 {t('hero.badge')}
               </span>
             </motion.div>
@@ -194,7 +200,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: reduceMotion ? 0 : 26 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto w-full max-w-[620px] pb-24 sm:pb-20 lg:pb-16"
+            className="relative z-20 mx-auto w-full max-w-[620px] pb-28 sm:pb-20 lg:pb-16"
           >
             <motion.div
               style={{ y: terraceGlowY }}
@@ -214,35 +220,37 @@ const HeroSection = () => {
                 clipPath: 'inset(0% round 32px)',
               }}
               transition={{ duration: reduceMotion ? 0.25 : 1.15, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className="relative ml-auto h-[400px] overflow-hidden rounded-[32px] border border-white/10 bg-dark-surface shadow-[0_28px_100px_rgba(0,0,0,0.36)] sm:h-[500px] lg:h-[620px]"
+              className="relative ml-auto h-[400px] overflow-visible rounded-[32px] border border-white/10 bg-dark-surface shadow-[0_28px_100px_rgba(0,0,0,0.36)] sm:h-[500px] lg:h-[620px]"
             >
-              <div className="absolute left-4 top-4 z-20 rounded-full border border-white/10 bg-black/24 px-3 py-2 backdrop-blur-md sm:left-6 sm:top-6">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-gold">{t('hero.subtitle')}</p>
+              <div className="absolute inset-0 overflow-hidden rounded-[32px]">
+                <div className="absolute left-4 top-4 z-20 rounded-full border border-white/10 bg-black/24 px-3 py-2 backdrop-blur-md sm:left-6 sm:top-6">
+                  <p className="text-[10px] uppercase tracking-[0.28em] text-gold">{t('hero.subtitle')}</p>
+                </div>
+
+                {!reduceMotion && (
+                  <motion.div
+                    animate={{ x: ['-10%', '8%', '-10%'], opacity: [0.08, 0.16, 0.08] }}
+                    transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+                    className="pointer-events-none absolute inset-y-0 left-[-22%] z-10 w-[62%] bg-[linear-gradient(120deg,transparent,rgba(255,214,153,0.28),transparent)] blur-3xl"
+                  />
+                )}
+
+                <motion.video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster={heroMainPoster}
+                  style={{ y: terraceImageY, scale: terraceImageScale }}
+                  className="absolute inset-x-0 top-[-7%] h-[114%] w-full object-cover"
+                >
+                  <source src={heroMainVideoWebm} type="video/webm" />
+                  <source src={heroMainVideoMp4} type="video/mp4" />
+                </motion.video>
+
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/18 to-transparent" />
               </div>
-
-              {!reduceMotion && (
-                <motion.div
-                  animate={{ x: ['-10%', '8%', '-10%'], opacity: [0.08, 0.16, 0.08] }}
-                  transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-                  className="pointer-events-none absolute inset-y-0 left-[-22%] z-10 w-[62%] bg-[linear-gradient(120deg,transparent,rgba(255,214,153,0.28),transparent)] blur-3xl"
-                />
-              )}
-
-              <motion.video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={heroMainPoster}
-                style={{ y: terraceImageY, scale: terraceImageScale }}
-                className="absolute inset-x-0 top-[-7%] h-[114%] w-full object-cover"
-              >
-                <source src={heroMainVideoWebm} type="video/webm" />
-                <source src={heroMainVideoMp4} type="video/mp4" />
-              </motion.video>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/18 to-transparent" />
 
               <motion.div
                 style={{ y: experienceCardY }}

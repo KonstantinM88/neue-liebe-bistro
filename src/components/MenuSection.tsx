@@ -1,68 +1,328 @@
-import { useState } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useLang } from '@/contexts/LangContext';
-import appetizer from '@/assets/appetizer.jpg';
-import mainCourse from '@/assets/main-course.jpg';
-import dessert from '@/assets/dessert.jpg';
-import cocktail from '@/assets/cocktail.jpg';
+import { useIsMobile } from '@/hooks/use-mobile';
+import backfischDesktop from '@/assets/backfisch_desktop_1600x1200.webp';
+import backfischMobile from '@/assets/backfisch_mobile_900.webp';
+import bauernfruhstuckDesktop from '@/assets/bauernfruhstuck_desktop_1600x1200.webp';
+import bauernfruhstuckMobile from '@/assets/bauernfruhstuck_mobile_900.webp';
+import burgerStGeorgDesktop from '@/assets/burger_st_georg_desktop_1600x1200.webp';
+import burgerStGeorgMobile from '@/assets/burger_st_georg_mobile_900.webp';
+import geschnetzeltesDesktop from '@/assets/geschnetzeltes_desktop_1600x1200.webp';
+import geschnetzeltesMobile from '@/assets/geschnetzeltes_mobile_900.webp';
+import kostritzerDesktop from '@/assets/kostritzer_desktop.webp';
+import kostritzerMobile from '@/assets/kostritzer_mobile.webp';
+import germanSnacksDesktop from '@/assets/german_snacks_desktop.webp';
+import germanSnacksMobile from '@/assets/german_snacks_mobile.webp';
+import nebraerBiersteakDesktop from '@/assets/nebraer_biersteak_desktop_1600x1200.webp';
+import nebraerBiersteakMobile from '@/assets/nebraer_biersteak_mobile_900.webp';
+import schweinemedaillonsDesktop from '@/assets/schweinemedaillons_desktop_1600x1200.webp';
+import schweinemedaillonsMobile from '@/assets/schweinemedaillons_mobile_900.webp';
+import strammerMaxDesktop from '@/assets/strammer_max_desktop_1600x1200.webp';
+import strammerMaxMobile from '@/assets/strammer_max_mobile_900.webp';
+import zigeunerSteakDesktop from '@/assets/zigeuner_steak_desktop_1600x1200.webp';
+import zigeunerSteakMobile from '@/assets/zigeuner_steak_mobile_900.webp';
+
+interface MenuImageSet {
+  mobile: string;
+  desktop: string;
+}
 
 interface MenuItem {
   name: { de: string; en: string };
   desc: { de: string; en: string };
   price: string;
+  image?: MenuImageSet;
 }
 
-const menuData: Record<string, { items: MenuItem[]; image: string }> = {
+interface MenuCategory {
+  items: MenuItem[];
+  image: MenuImageSet;
+}
+
+const menuData: Record<string, MenuCategory> = {
   starters: {
-    image: appetizer,
+    image: {
+      mobile: bauernfruhstuckMobile,
+      desktop: bauernfruhstuckDesktop,
+    },
     items: [
-      { name: { de: 'Bruschetta Classica', en: 'Classic Bruschetta' }, desc: { de: 'Geröstetes Brot mit Tomaten, Basilikum & Olivenöl', en: 'Toasted bread with tomatoes, basil & olive oil' }, price: '8,50€' },
-      { name: { de: 'Carpaccio vom Rind', en: 'Beef Carpaccio' }, desc: { de: 'Hauchdünn geschnitten mit Rucola & Parmesan', en: 'Thinly sliced with arugula & parmesan' }, price: '12,90€' },
-      { name: { de: 'Saisonale Suppe', en: 'Seasonal Soup' }, desc: { de: 'Frische Zutaten der Saison', en: 'Fresh seasonal ingredients' }, price: '7,50€' },
-      { name: { de: 'Garnelen in Knoblauch', en: 'Garlic Prawns' }, desc: { de: 'Gebratene Garnelen mit Knoblauchbutter', en: 'Pan-fried prawns in garlic butter' }, price: '14,50€' },
+      {
+        name: { de: 'Bauernfrühstück', en: 'Farmer’s Breakfast' },
+        desc: {
+          de: 'Serviert mit Rohkostsalat und Gewürzgurke.',
+          en: 'Served with fresh salad and pickled cucumber.',
+        },
+        price: '12,50€',
+        image: {
+          mobile: bauernfruhstuckMobile,
+          desktop: bauernfruhstuckDesktop,
+        },
+      },
+      {
+        name: { de: 'Strammer Max', en: 'Strammer Max' },
+        desc: {
+          de: 'Schwarzbrot mit Schinken, zwei Spiegeleiern, Rohkostsalat und Gewürzgurke.',
+          en: 'Dark bread with ham, two fried eggs, side salad, and pickled cucumber.',
+        },
+        price: '9,50€',
+        image: {
+          mobile: strammerMaxMobile,
+          desktop: strammerMaxDesktop,
+        },
+      },
+      {
+        name: { de: 'Backfisch', en: 'Fried Fish Fillet' },
+        desc: {
+          de: 'Serviert mit hausgemachter Remoulade und Bratkartoffeln.',
+          en: 'Served with homemade remoulade and pan-fried potatoes.',
+        },
+        price: '13,50€',
+        image: {
+          mobile: backfischMobile,
+          desktop: backfischDesktop,
+        },
+      },
     ],
   },
   main: {
-    image: mainCourse,
+    image: {
+      mobile: geschnetzeltesMobile,
+      desktop: geschnetzeltesDesktop,
+    },
     items: [
-      { name: { de: 'Rinderfilet', en: 'Beef Tenderloin' }, desc: { de: 'Mit Rotweinsauce und Gemüse der Saison', en: 'With red wine sauce and seasonal vegetables' }, price: '28,90€' },
-      { name: { de: 'Gebratener Lachs', en: 'Pan-Seared Salmon' }, desc: { de: 'Auf Blattspinat mit Zitronenbutter', en: 'On baby spinach with lemon butter' }, price: '24,50€' },
-      { name: { de: 'Pasta Trüffel', en: 'Truffle Pasta' }, desc: { de: 'Hausgemachte Tagliatelle mit Trüffelcreme', en: 'Homemade tagliatelle with truffle cream' }, price: '19,90€' },
-      { name: { de: 'Wiener Schnitzel', en: 'Wiener Schnitzel' }, desc: { de: 'Klassisch paniert mit Kartoffelsalat', en: 'Classic breaded with potato salad' }, price: '22,50€' },
+      {
+        name: { de: 'Geschnetzeltes', en: 'Creamy Sliced Chicken' },
+        desc: {
+          de: 'Zarte Hähnchenbruststreifen mit cremigen Champignons, serviert mit Kroketten.',
+          en: 'Tender chicken breast strips with creamy mushrooms, served with croquettes.',
+        },
+        price: '18,50€',
+        image: {
+          mobile: geschnetzeltesMobile,
+          desktop: geschnetzeltesDesktop,
+        },
+      },
+      {
+        name: { de: 'Burger „St. Georg“', en: 'St. Georg Burger' },
+        desc: {
+          de: 'Saftiger Rindfleisch-Burger mit Bacon, Spiegelei, Weißkrautsalat, BBQ-Sauce, Gewürzgurke und Schmorzwiebeln, serviert mit Pommes.',
+          en: 'Juicy beef burger with bacon, fried egg, cabbage slaw, BBQ sauce, pickled cucumber, braised onions, and fries.',
+        },
+        price: '19,50€',
+        image: {
+          mobile: burgerStGeorgMobile,
+          desktop: burgerStGeorgDesktop,
+        },
+      },
     ],
   },
   desserts: {
-    image: dessert,
+    image: {
+      mobile: nebraerBiersteakMobile,
+      desktop: nebraerBiersteakDesktop,
+    },
     items: [
-      { name: { de: 'Schokoladen-Mousse', en: 'Chocolate Mousse' }, desc: { de: 'Belgische Schokolade mit Goldstaub', en: 'Belgian chocolate with gold dust' }, price: '9,50€' },
-      { name: { de: 'Panna Cotta', en: 'Panna Cotta' }, desc: { de: 'Mit Waldbeeren-Kompott', en: 'With forest berry compote' }, price: '8,90€' },
-      { name: { de: 'Crème Brûlée', en: 'Crème Brûlée' }, desc: { de: 'Klassisch mit Vanille', en: 'Classic vanilla' }, price: '8,50€' },
+      {
+        name: { de: 'Nebraer-Biersteak', en: 'Nebra Beer Steak' },
+        desc: {
+          de: 'Gebratenes Schweinenackensteak mit Schmorzwiebeln, mit Nebraer Bier abgelöscht und mit Bratkartoffeln serviert.',
+          en: 'Pan-seared pork neck steak with braised onions, finished with Nebra beer and served with fried potatoes.',
+        },
+        price: '18,50€',
+        image: {
+          mobile: nebraerBiersteakMobile,
+          desktop: nebraerBiersteakDesktop,
+        },
+      },
+      {
+        name: { de: 'Zarte Schweinemedaillons', en: 'Tender Pork Medallions' },
+        desc: {
+          de: 'Serviert mit cremigen Pilzen und Kroketten.',
+          en: 'Served with creamy mushrooms and croquettes.',
+        },
+        price: '19,50€',
+        image: {
+          mobile: schweinemedaillonsMobile,
+          desktop: schweinemedaillonsDesktop,
+        },
+      },
+      {
+        name: { de: '„Zigeuner-Steak“', en: 'Paprika Steak' },
+        desc: {
+          de: 'Saftig gebratenes Schweinenackensteak mit kräftiger Paprikagemüse-Sauce und Pommes.',
+          en: 'Juicy pork neck steak with a hearty paprika vegetable sauce and fries.',
+        },
+        price: '18,50€',
+        image: {
+          mobile: zigeunerSteakMobile,
+          desktop: zigeunerSteakDesktop,
+        },
+      },
+    ],
+  },
+  beerSnacks: {
+    image: {
+      mobile: germanSnacksMobile,
+      desktop: germanSnacksDesktop,
+    },
+    items: [
+      {
+        name: { de: 'Bierbrett Neue Liebe', en: 'Neue Liebe Beer Board' },
+        desc: {
+          de: 'Kleine Auswahl aus Kaminwurst, Käsewürfeln, Gewürzgurken und kräftigem Landbrot.',
+          en: 'A small board with smoked sausage, cheese cubes, pickled cucumbers, and rustic country bread.',
+        },
+        price: '12,90€',
+      },
+      {
+        name: { de: 'Brezelknusper mit Obazda', en: 'Pretzel Bites with Obazda' },
+        desc: {
+          de: 'Warme Laugenbissen mit cremigem Bierkäse-Dip und roten Zwiebeln.',
+          en: 'Warm pretzel bites with creamy beer cheese dip and red onions.',
+        },
+        price: '6,90€',
+      },
+      {
+        name: { de: 'Paprika-Kartoffelecken', en: 'Paprika Potato Wedges' },
+        desc: {
+          de: 'Knusprige Kartoffelecken mit Rauchpaprika und milder Kräutercreme.',
+          en: 'Crispy potato wedges with smoked paprika and mild herb cream.',
+        },
+        price: '7,50€',
+      },
+      {
+        name: { de: 'Käsekrainer-Happen', en: 'Sausage Bites' },
+        desc: {
+          de: 'Gebratene Würstchenstücke mit Senfzwiebeln und frischem Brot.',
+          en: 'Pan-seared sausage bites with mustard onions and fresh bread.',
+        },
+        price: '9,80€',
+      },
     ],
   },
   drinks: {
-    image: cocktail,
+    image: {
+      mobile: kostritzerMobile,
+      desktop: kostritzerDesktop,
+    },
     items: [
-      { name: { de: 'Hauswein (Glas)', en: 'House Wine (Glass)' }, desc: { de: 'Rot oder Weiß aus der Region', en: 'Red or white from the region' }, price: '5,50€' },
-      { name: { de: 'Craft Cocktails', en: 'Craft Cocktails' }, desc: { de: 'Handgemixte Cocktails unserer Bar', en: 'Handcrafted cocktails from our bar' }, price: '10,50€' },
-      { name: { de: 'Aperol Spritz', en: 'Aperol Spritz' }, desc: { de: 'Der italienische Klassiker', en: 'The Italian classic' }, price: '8,50€' },
-      { name: { de: 'Lokale Biere', en: 'Local Beers' }, desc: { de: 'Auswahl regionaler Brauereien', en: 'Selection from regional breweries' }, price: '4,50€' },
+      {
+        name: { de: '„Nebraer Bier“ St. Georg', en: 'Nebra Beer St. Georg' },
+        desc: {
+          de: 'Feinmilde Bierspezialität mit malzig-süßem, vollmundigem Geschmack. 0,5 l.',
+          en: 'A smooth beer specialty with malty sweetness and a full-bodied finish. 0.5 l.',
+        },
+        price: '4,50€',
+      },
+      {
+        name: { de: 'Köstritzer Schwarzbier', en: 'Köstritzer Black Beer' },
+        desc: {
+          de: 'Herb-fein mit röstigen Malznoten und eleganter Tiefe. 0,5 l.',
+          en: 'Finely bitter with roasted malt notes and elegant depth. 0.5 l.',
+        },
+        price: '4,80€',
+      },
+      {
+        name: { de: 'Keller-Radler', en: 'Cellar Radler' },
+        desc: {
+          de: 'Erfrischend gemischt, leicht, spritzig und ideal zum Essen. 0,5 l.',
+          en: 'Refreshing and lightly sparkling, ideal alongside hearty dishes. 0.5 l.',
+        },
+        price: '4,60€',
+      },
+      {
+        name: { de: 'Hausgemachte Limonade', en: 'Homemade Lemonade' },
+        desc: {
+          de: 'Zitrone, Minze und kühler Sprudel mit frischer Note. 0,4 l.',
+          en: 'Lemon, mint, and sparkling water with a fresh finish. 0.4 l.',
+        },
+        price: '4,90€',
+      },
     ],
   },
 };
 
-const categoryKeys = ['starters', 'main', 'desserts', 'drinks'] as const;
+const categoryKeys = ['starters', 'main', 'desserts', 'beerSnacks', 'drinks'] as const;
 const categoryTranslationKeys: Record<string, string> = {
   starters: 'menu.starters',
   main: 'menu.main',
   desserts: 'menu.desserts',
+  beerSnacks: 'menu.beerSnacks',
   drinks: 'menu.drinks',
 };
 
 const MenuSection = () => {
   const { lang, t } = useLang();
   const reduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
   const [active, setActive] = useState<string>('starters');
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+  const [carouselDirection, setCarouselDirection] = useState<1 | -1>(1);
+  const [hasManualSelection, setHasManualSelection] = useState(false);
   const data = menuData[active];
+  const imageItemIndexes = data.items
+    .map((item, index) => (item.image ? index : -1))
+    .filter((index) => index >= 0);
+  const hasImageCarousel = imageItemIndexes.length > 1;
+  const safeSelectedItemIndex = imageItemIndexes.includes(selectedItemIndex)
+    ? selectedItemIndex
+    : imageItemIndexes[0] ?? 0;
+  const activeImageItem = data.items[safeSelectedItemIndex];
+  const activeImage = activeImageItem?.image ?? data.image;
+
+  useEffect(() => {
+    setSelectedItemIndex(imageItemIndexes[0] ?? 0);
+    setCarouselDirection(1);
+    setHasManualSelection(false);
+  }, [active]);
+
+  useEffect(() => {
+    if (reduceMotion || !hasImageCarousel || hasManualSelection) {
+      return undefined;
+    }
+
+    const interval = window.setInterval(() => {
+      setCarouselDirection(1);
+      setSelectedItemIndex((current) => {
+        const currentIndex = imageItemIndexes.includes(current) ? imageItemIndexes.indexOf(current) : 0;
+        const nextIndex = (currentIndex + 1) % imageItemIndexes.length;
+        return imageItemIndexes[nextIndex];
+      });
+    }, 4200);
+
+    return () => window.clearInterval(interval);
+  }, [hasImageCarousel, hasManualSelection, imageItemIndexes, reduceMotion]);
+
+  const selectItemImage = (index: number) => {
+    if (!data.items[index]?.image) {
+      return;
+    }
+
+    const currentIndex = imageItemIndexes.includes(safeSelectedItemIndex)
+      ? imageItemIndexes.indexOf(safeSelectedItemIndex)
+      : 0;
+    const nextIndex = imageItemIndexes.indexOf(index);
+
+    setCarouselDirection(nextIndex >= currentIndex ? 1 : -1);
+    setSelectedItemIndex(index);
+    setHasManualSelection(true);
+  };
+
+  const moveCarousel = (direction: 1 | -1) => {
+    if (!hasImageCarousel) {
+      return;
+    }
+
+    setHasManualSelection(true);
+    setCarouselDirection(direction);
+    setSelectedItemIndex((current) => {
+      const currentIndex = imageItemIndexes.includes(current) ? imageItemIndexes.indexOf(current) : 0;
+      const nextIndex = (currentIndex + direction + imageItemIndexes.length) % imageItemIndexes.length;
+      return imageItemIndexes[nextIndex];
+    });
+  };
+
   const listVariants = {
     hidden: {},
     visible: {
@@ -87,6 +347,17 @@ const MenuSection = () => {
         ease: [0.22, 1, 0.36, 1],
       },
     },
+  };
+  const slideVariants = {
+    enter: (direction: 1 | -1) => ({
+      x: reduceMotion ? 0 : direction > 0 ? '100%' : '-100%',
+    }),
+    center: {
+      x: 0,
+    },
+    exit: (direction: 1 | -1) => ({
+      x: reduceMotion ? 0 : direction > 0 ? '-100%' : '100%',
+    }),
   };
 
   return (
@@ -148,7 +419,7 @@ const MenuSection = () => {
               onClick={() => setActive(key)}
               whileHover={reduceMotion ? undefined : { y: -2 }}
               whileTap={reduceMotion ? undefined : { scale: 0.985 }}
-              className={`rounded-full border px-5 py-3 text-[11px] md:px-6 md:text-sm tracking-[0.2em] uppercase font-body transition-all duration-300 backdrop-blur-md ${
+              className={`rounded-full border px-4 py-3 text-[10px] tracking-[0.16em] uppercase font-body transition-all duration-300 backdrop-blur-md sm:px-5 sm:text-[11px] sm:tracking-[0.2em] md:px-6 md:text-sm ${
                 active === key
                   ? 'border-gold/65 bg-gold/12 text-gold shadow-[0_10px_28px_rgba(201,146,46,0.16)]'
                   : 'border-white/10 bg-white/[0.03] text-muted-foreground hover:border-white/18 hover:text-foreground'
@@ -174,12 +445,63 @@ const MenuSection = () => {
           >
             <div className="absolute -inset-4 rounded-[34px] bg-[radial-gradient(circle,rgba(201,146,46,0.15),transparent_72%)] blur-3xl" />
             <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-2 shadow-[0_28px_80px_rgba(0,0,0,0.28)]">
-              <div className="overflow-hidden rounded-[22px]">
-                <img
-                  src={data.image}
-                  alt={t(categoryTranslationKeys[active])}
-                  className="h-[400px] w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-                />
+              <div
+                className="relative overflow-hidden rounded-[22px]"
+              >
+                <motion.div
+                  drag={isMobile && hasImageCarousel ? 'x' : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.12}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -45) {
+                      moveCarousel(1);
+                    }
+
+                    if (info.offset.x > 45) {
+                      moveCarousel(-1);
+                    }
+                  }}
+                  className="relative"
+                >
+                  <div className="relative h-[400px]">
+                    <AnimatePresence initial={false} custom={carouselDirection}>
+                      <motion.div
+                        key={`${active}-${safeSelectedItemIndex}-${isMobile ? 'mobile' : 'desktop'}`}
+                        custom={carouselDirection}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{ duration: reduceMotion ? 0.15 : 0.62, ease: [0.22, 1, 0.36, 1] }}
+                        className="absolute inset-0"
+                      >
+                        <img
+                          src={isMobile ? activeImage.mobile : activeImage.desktop}
+                          alt={activeImageItem?.name[lang] ?? t(categoryTranslationKeys[active])}
+                          className="h-full w-full object-cover object-center"
+                        />
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </motion.div>
+
+                {hasImageCarousel && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-3 z-10 flex justify-center">
+                    <div className="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-3 py-2 backdrop-blur-md">
+                      {imageItemIndexes.map((itemIndex) => (
+                        <button
+                          key={`${active}-dot-${itemIndex}`}
+                          type="button"
+                          aria-label={data.items[itemIndex].name[lang]}
+                          onClick={() => selectItemImage(itemIndex)}
+                          className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
+                            safeSelectedItemIndex === itemIndex ? 'bg-gold shadow-[0_0_14px_rgba(201,146,46,0.55)]' : 'bg-white/35 hover:bg-white/60'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent" />
             </div>
@@ -197,7 +519,13 @@ const MenuSection = () => {
                 key={`${active}-${i}`}
                 variants={itemVariants}
                 whileHover={reduceMotion ? undefined : { y: -4 }}
-                className="group relative overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-colors duration-300 sm:p-6"
+                onMouseEnter={() => selectItemImage(i)}
+                onClick={() => selectItemImage(i)}
+                className={`group relative overflow-hidden rounded-[28px] border bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.22)] backdrop-blur-md transition-colors duration-300 sm:p-6 ${
+                  safeSelectedItemIndex === i && item.image
+                    ? 'border-gold/35 bg-[linear-gradient(135deg,rgba(201,146,46,0.12),rgba(255,255,255,0.03))]'
+                    : 'border-white/10'
+                } ${item.image ? 'cursor-pointer' : ''}`}
               >
                 <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.06),transparent_38%,transparent)] opacity-60 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative flex items-start justify-between gap-4">

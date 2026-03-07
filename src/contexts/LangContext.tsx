@@ -63,11 +63,12 @@ const translations: Translations = {
   // Menu
   'menu.title': { de: 'Unsere Speisekarte', en: 'Our Menu' },
   'menu.subtitle': { de: 'Entdecken Sie unsere kulinarischen Kreationen', en: 'Discover our culinary creations' },
-  'menu.starters': { de: 'Vorspeisen', en: 'Starters' },
-  'menu.main': { de: 'Hauptgerichte', en: 'Main Courses' },
-  'menu.desserts': { de: 'Desserts', en: 'Desserts' },
-  'menu.drinks': { de: 'Getränke', en: 'Drinks' },
-  'menu.avg': { de: 'Durchschnittspreis: 20–30€ pro Person', en: 'Average price: 20–30€ per person' },
+  'menu.starters': { de: 'Klassiker', en: 'Classics' },
+  'menu.main': { de: 'Pfanne & Burger', en: 'Pan Dishes & Burgers' },
+  'menu.desserts': { de: 'Steaks & Medaillons', en: 'Steaks & Medallions' },
+  'menu.beerSnacks': { de: 'Zum Bier', en: 'Beer Snacks' },
+  'menu.drinks': { de: 'Bier & Drinks', en: 'Beer & Drinks' },
+  'menu.avg': { de: 'Preise in dieser Auswahl: 4,50€ bis 19,50€', en: 'Prices in this selection: €4.50 to €19.50' },
 
   // Gallery
   'gallery.title': { de: 'Galerie', en: 'Gallery' },
