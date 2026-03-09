@@ -107,7 +107,7 @@ const HeroSection = () => {
 
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-6 pb-16 lg:px-12 lg:pb-20">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:gap-10 xl:gap-16">
-          <motion.div className="w-full max-w-[720px]" style={{ y: contentY }}>
+          <motion.div className="order-2 w-full max-w-[720px] lg:order-1" style={{ y: contentY }}>
             <motion.div
               initial={{ opacity: 0, y: reduceMotion ? 0 : 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -200,7 +200,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: reduceMotion ? 0 : 26 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-20 mx-auto w-full max-w-[620px] pb-28 sm:pb-20 lg:pb-16"
+            className="order-1 relative z-20 mx-auto w-full max-w-[620px] pb-28 sm:pb-20 lg:order-2 lg:pb-16"
           >
             <motion.div
               style={{ y: terraceGlowY }}
