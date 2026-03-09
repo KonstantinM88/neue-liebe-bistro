@@ -165,7 +165,7 @@ const HeroSection = () => {
               className="mt-8 flex flex-col gap-3 sm:flex-row"
             >
               <a
-                href="#contact"
+                href="#reservation"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-gold/60 bg-gold/10 px-6 py-3 text-xs tracking-[0.24em] uppercase text-gold hover:bg-primary hover:text-primary-foreground transition-all duration-300 font-body"
               >
                 {t('nav.reserve')}

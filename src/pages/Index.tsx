@@ -5,6 +5,7 @@ import AboutSection from '@/components/AboutSection';
 import MarqueeSection from '@/components/MarqueeSection';
 import MenuSection from '@/components/MenuSection';
 import GallerySection from '@/components/GallerySection';
+import ReservationSection from '@/components/ReservationSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import { useLang } from '@/contexts/LangContext';
@@ -60,6 +61,7 @@ const Index = () => {
         <AboutSection />
         <MenuSection />
         <GallerySection />
+        <ReservationSection />
         <ContactSection />
       </main>
       <Footer />

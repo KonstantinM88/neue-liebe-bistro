@@ -74,6 +74,38 @@ const translations: Translations = {
   'gallery.title': { de: 'Galerie', en: 'Gallery' },
   'gallery.subtitle': { de: 'Einblicke in unser Restaurant', en: 'A Glimpse Into Our Restaurant' },
 
+  // Reservation
+  'reservation.eyebrow': { de: 'Ihren Platz sichern', en: 'Secure your table' },
+  'reservation.title': { de: 'Tisch reservieren', en: 'Reserve your table' },
+  'reservation.description': {
+    de: 'Wir freuen uns auf Ihren Besuch. Teilen Sie uns Datum, Uhrzeit und Anlass mit, damit wir Ihren Tisch in der Neuen Liebe stilvoll vorbereiten können.',
+    en: 'We look forward to your visit. Share your date, time, and occasion so we can prepare your table at Neue Liebe with care.',
+  },
+  'reservation.firstName': { de: 'Vorname', en: 'First name' },
+  'reservation.lastName': { de: 'Nachname', en: 'Last name' },
+  'reservation.email': { de: 'E-Mail', en: 'E-mail' },
+  'reservation.phone': { de: 'Telefon', en: 'Phone' },
+  'reservation.date': { de: 'Datum', en: 'Date' },
+  'reservation.time': { de: 'Uhrzeit', en: 'Time' },
+  'reservation.guests': { de: 'Anzahl Personen', en: 'Number of guests' },
+  'reservation.guestsPlaceholder': { de: '4', en: '4' },
+  'reservation.occasion': { de: 'Anlass', en: 'Occasion' },
+  'reservation.occasionPlaceholder': { de: 'Anlass wählen', en: 'Choose occasion' },
+  'reservation.occasionDinner': { de: 'Dinner', en: 'Dinner' },
+  'reservation.occasionBirthday': { de: 'Geburtstag', en: 'Birthday' },
+  'reservation.occasionAnniversary': { de: 'Jahrestag', en: 'Anniversary' },
+  'reservation.occasionBusiness': { de: 'Geschäftlich', en: 'Business' },
+  'reservation.notes': { de: 'Sonderwünsche', en: 'Special requests' },
+  'reservation.notesPlaceholder': {
+    de: 'Allergien, Kinderstuhl, ruhiger Tisch oder weitere Wünsche ...',
+    en: 'Allergies, baby chair, quiet table, or any other wishes ...',
+  },
+  'reservation.note': {
+    de: 'Reservierungen werden persönlich telefonisch bestätigt: 034461 599804',
+    en: 'Reservations are confirmed personally by phone: 034461 599804',
+  },
+  'reservation.submit': { de: 'Reservierung anfragen', en: 'Request reservation' },
+
   // Contact
   'contact.title': { de: 'Kontakt', en: 'Contact' },
   'contact.address': { de: 'Adresse', en: 'Address' },

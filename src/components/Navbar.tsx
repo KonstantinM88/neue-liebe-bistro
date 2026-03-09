@@ -89,7 +89,7 @@ const Navbar = () => {
             </div>
 
             <a
-              href="#contact"
+              href="#reservation"
               className="rounded-full border border-gold/60 bg-gold/8 px-5 py-2.5 text-[11px] tracking-[0.24em] uppercase text-gold hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
               {t('nav.reserve')}
@@ -166,7 +166,7 @@ const Navbar = () => {
                   Germany
                 </p>
                 <a
-                  href="#contact"
+                  href="#reservation"
                   onClick={() => setMobileOpen(false)}
                   className="mt-4 inline-flex rounded-full border border-gold/60 bg-gold/10 px-4 py-2.5 text-[11px] tracking-[0.24em] uppercase text-gold"
                 >
